@@ -11,3 +11,5 @@
       <p>Invoice ID: <%= link_to "#{item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.invoice_id}" %>, Created at: <%= item.created_at.strftime("%A, %B %d, %Y") %></p>
     </div>
 <% end %>
+
+<%= link_to 'My Discounts', merchant_bulk_discounts_path(@merchant) %>
