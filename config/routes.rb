@@ -5,9 +5,11 @@ Rails.application.routes.draw do
     resources :items
     resources :invoices
     resources :invoice_items
-    resources :bulk_discounts 
+    resources :bulk_discounts
     get '/dashboard', to: 'merchants#dashboard'
   end
+
+  resources :bulk_discounts, only: [:show, :edit]
 
   resources :items, only: [:edit, :update, :new, :create]
 

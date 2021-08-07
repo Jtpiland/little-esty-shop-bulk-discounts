@@ -46,8 +46,6 @@ class Admin:: MerchantsController < ApplicationController
     redirect_to "/admin/merchants"
   end
 
-
-
   private
   def merchant_params
     params.permit(:name, :status)
