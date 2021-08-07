@@ -53,4 +53,10 @@ RSpec.describe 'Merchant Bulk Discounts Index Page' do
     end
     expect(page).to_not have_content(@discount_1.id)
   end
+
+  it 'can display the next three upcoming holidays with their name and date' do #need to strengthin test 
+    expect(page).to have_content("Labor Day 2021-09-06")
+    expect(page).to have_content("Columbus Day 2021-10-11")
+    expect(page).to have_content("Veterans Day 2021-11-11")
+  end
 end
