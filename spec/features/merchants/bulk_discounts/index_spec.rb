@@ -13,20 +13,28 @@ RSpec.describe 'Merchant Bulk Discounts Index Page' do
 
   it 'can display all the merchants bulk discounts and their attributes' do
     within "#discount-#{@discount_1.id}" do
-      expect(page).to have_content(@discount_1.id)
+      expect(page).to have_link(@discount_1.id)
       expect(page).to have_content(@discount_1.percentage)
       expect(page).to have_content(@discount_1.quantity)
     end
     within "#discount-#{@discount_2.id}" do
-      expect(page).to have_content(@discount_2.id)
+      expect(page).to have_link(@discount_2.id)
       expect(page).to have_content(@discount_2.percentage)
       expect(page).to have_content(@discount_2.quantity)
     end
-    within "#discount-#{@discount_1.id}" do
-      expect(page).to have_content(@discount_3.id)
-      expect(page).to have_content(@discount_1.percentage)
-      expect(page).to have_content(@discount_1.quantity)
+    within "#discount-#{@discount_3.id}" do
+      expect(page).to have_link(@discount_3.id)
+      expect(page).to have_content(@discount_3.percentage)
+      expect(page).to have_content(@discount_3.quantity)
     end
   end
 
+  it 'can link to the show page of a particular bulk discount' do
+    within "#discount-#{@discount_1.id}" do
+
+      click_link "#{@discount_1.id}"
+
+      expect(current_path).to eq(merchant_bulk_discount_path("#{@merchant_1.id}", "#{@discount_1.id}"))
+    end
+  end
 end
