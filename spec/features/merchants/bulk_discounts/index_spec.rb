@@ -49,7 +49,7 @@ RSpec.describe 'Merchant Bulk Discounts Index Page' do
   it 'can delete a bulk discount and redirect back to merchants bulk discount index page' do
     within "#discount-#{@discount_1.id}" do
       expect(page).to have_button("Delete Bulk Discount")
-      click_button "Delete Bulk Discount"
+        click_button "Delete Bulk Discount"
     end
     expect(page).to_not have_content(@discount_1.id)
   end
