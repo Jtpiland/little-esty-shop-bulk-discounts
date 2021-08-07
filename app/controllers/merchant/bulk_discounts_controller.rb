@@ -1,4 +1,12 @@
 class Merchant::BulkDiscountsController < ApplicationController
+  before_action :holiday_fetch
+
+  def holiday_fetch
+    json = NagerService.new.holiday
+    @holidays = json[0..2].map do |holiday|
+      Holiday.new(holiday)
+    end
+  end
 
   def index
     @merchant = Merchant.find(params[:merchant_id])
@@ -12,13 +20,12 @@ class Merchant::BulkDiscountsController < ApplicationController
 
   def new
     @merchant = Merchant.find(params[:merchant_id])
-
+    @bulk_discount = BulkDiscount.new
   end
 
   def create
     @merchant = Merchant.find(params[:merchant_id])
-    bulk_discount = BulkDiscount.new(discount_params)
-
+    bulk_discount = @merchant.bulk_discounts.create(discount_params)
     if bulk_discount.save
       redirect_to merchant_bulk_discounts_path(@merchant.id)
     else

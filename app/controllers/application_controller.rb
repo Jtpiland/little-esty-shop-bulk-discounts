@@ -2,6 +2,14 @@ class ApplicationController < ActionController::Base
   # before_action :repo_fetch
   #before_action :pull_count
   #before_action :contributor_fetch
+  # before_action :holiday_fetch
+  #
+  # def holiday_fetch
+  #   json = NagerService.new.holiday
+  #   @holidays = json.map do |holiday|
+  #     Holiday.new(holiday)
+  #   end
+  # end
 
   # def repo_fetch
   #   json = GithubService.new.repo_name

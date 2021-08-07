@@ -7,4 +7,9 @@
 </section>
 <% end %>
 
-<%= link_to "Create New Discount", new_merchant_bulk_discount_path(@merchant.id) %>
+<%= link_to "Create New Discount", new_merchant_bulk_discount_path(@merchant.id) %></br>
+
+<% @holidays.each do |holiday| %>
+<p><%= holiday.name %>
+<%= holiday.date %></p>
+<% end %>
