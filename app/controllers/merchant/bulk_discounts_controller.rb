@@ -35,10 +35,22 @@ class Merchant::BulkDiscountsController < ApplicationController
     redirect_to merchant_bulk_discounts_path(@merchant.id)
   end
 
+  def edit
+    @merchant = Merchant.find(params[:merchant_id])
+    @bulk_discount = BulkDiscount.find(params[:id])
+  end
+
+  def update
+    merchant = Merchant.find(params[:merchant_id])
+    bulk_discount = BulkDiscount.find(params[:id])
+    bulk_discount.update(discount_params)
+    redirect_to merchant_bulk_discount_path(merchant, bulk_discount)
+    flash[:alert] = "Your Discount Has Been Changed"
+  end
 
   private
 
   def discount_params
-    params.permit(:percentage, :quantity, :merchant_id)
+    params.require(:bulk_discount).permit(:percentage, :quantity, :merchant_id)
   end
 end
