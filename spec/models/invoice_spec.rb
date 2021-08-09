@@ -17,6 +17,8 @@ RSpec.describe Invoice, type: :model do
     @merchant1 = Merchant.create!(name: 'Sparkys Shop')
     @merchant2 = Merchant.create!(name: 'BBs Petstore')
 
+    @merchant1.bulk_discounts.create!(percentage: 10, quantity: 5)
+
     @customer1 = Customer.create!(first_name: 'Petey', last_name: 'Wimbley')
     @customer2 = Customer.create!(first_name: 'Victoria', last_name: 'Jenkins')
     @customer3 = Customer.create!(first_name: 'Pedro', last_name: 'Oscar')
@@ -65,7 +67,7 @@ RSpec.describe Invoice, type: :model do
     describe '::admin_incomplete_invoices' do
       it 'can find all the incomplete invoices listed by least recent created at date' do #returns only one 'completed' invoice (invoice6)
        expect(Invoice.admin_incomplete_invoices).to eq([@invoice3])
-     end
+      end
     end
   end
 
@@ -83,5 +85,11 @@ RSpec.describe Invoice, type: :model do
     it 'can calculate total invoice revenue' do
       expect(@invoice3.total_invoice_revenue).to eq(35.00)
     end
+
+    # describe '#total_discounted_revenue' do
+    #   it 'can find the toal revenue including discounts' do
+    #     expect(@invoice3.total_discounted_revenue).to eq(315.00)
+    #   end
+    # end
   end
 end
