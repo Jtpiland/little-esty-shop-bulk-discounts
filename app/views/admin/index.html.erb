@@ -1,17 +1,34 @@
-<h2>Admin Dashboard</h2>
-<%= link_to "Dashboard", admin__index_path %>
-<%= link_to "Merchants", admin_merchants_path %>
-<%= link_to "Invoices", admin_invoices_path %>
+<div class="dashboard">
+  <h2>Admin Dashboard</h2>
+  <div>
+    <button type="button" class="btn btn-dark"><%= link_to "Dashboard", admin__index_path %></button>
+    <button type="button" class="btn btn-dark"><%= link_to "Merchants", admin_merchants_path %></button>
+    <button type="button" class="btn btn-dark"><%= link_to "Invoices", admin_invoices_path %></button>
+  </div>
+</div
 
-<h3>Top Customers</h3>
-<ol>
-  <% Customer.admin_top_five_customers.each do |customer| %>
-    <li><%= "#{customer.first_name} " "#{customer.last_name} " "#{customer.transaction_count}"%></li>
-  <% end %>
-</ol>
+<div class="flex">
+<div class="dashboard-list-wrapper">
+  <div class="flex">
+    <div>
+      <h3 class="list-wrapper">Top Customers</h3>
+      <ol>
+        <% Customer.admin_top_five_customers.each do |customer| %>
+          <li><%= "#{customer.first_name} " "#{customer.last_name} " "#{customer.transaction_count}"%></li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
 
-<h3>Incomplete Invoices</h3>
-<% Invoice.admin_incomplete_invoices.each do |invoice| %>
-  <%= link_to "Invoice # #{invoice.number}", "/admin/invoices/#{invoice.id}" %>
-  <%= invoice.created_at.strftime("%A, %B %d, %Y") %><br>
-<% end.uniq %>
+  <div class="flex">
+    <div>
+      <h3 class="list-wrapper">Incomplete Invoices</h3>
+      <div class="list">
+      <% Invoice.admin_incomplete_invoices.each do |invoice| %>
+        <%= link_to "Invoice # #{invoice.number}", "/admin/invoices/#{invoice.id}" %>
+        <%= invoice.created_at.strftime("%A, %B %d, %Y") %><br>
+      <% end.uniq %>
+    </div>
+  </div>
+</div>
+</div>

@@ -33,14 +33,7 @@ RSpec.describe 'Merchant Invoices Index Page' do
     @transaction5 = @invoice5.transactions.create!(credit_card_number: "7934759378", credit_card_expiration_date: '03/20', result: 0)
     @transaction6 = @invoice6.transactions.create!(credit_card_number: "7894739999", credit_card_expiration_date: '04/20', result: 0)
 
-    @invoice1.items << [@item1]
-    @invoice2.items << [@item2]
-    @invoice3.items << [@item3, @item4]
-    @invoice4.items << [@item4]
-    @invoice5.items << [@item4]
-    @invoice6.items << [@item1, @item2]
-
-    InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, unit_price: 1000, quantity: 5, status: 1, created_at: "2012-03-25 09:54:09 UTC")
+    InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id , unit_price: 1000, quantity: 5, status: 1, created_at: "2012-03-25 09:54:09 UTC")
     InvoiceItem.create!(invoice_id: @invoice2.id, item_id: @item2.id, unit_price: 1000, quantity: 5, status: 1, created_at: "2012-03-24 09:54:09 UTC")
     InvoiceItem.create!(invoice_id: @invoice4.id, item_id: @item4.id, unit_price: 1000, quantity: 5, status: 2)
     InvoiceItem.create!(invoice_id: @invoice5.id, item_id: @item4.id, unit_price: 1000, quantity: 5, status: 1, created_at: "2012-03-23 09:54:09 UTC")
@@ -52,8 +45,6 @@ RSpec.describe 'Merchant Invoices Index Page' do
 
       expect(page).to have_content(@invoice1.id.to_s)
       expect(page).to have_content(@invoice2.id.to_s)
-      expect(page).to have_content(@invoice3.id.to_s)
-      expect(page).to have_content(@invoice6.id.to_s)
 
       expect(page).to_not have_content(@invoice4.id.to_s)
       expect(page).to_not have_content(@invoice5.id.to_s)
@@ -62,7 +53,8 @@ RSpec.describe 'Merchant Invoices Index Page' do
     it 'can link an invoice to its show page' do
       visit "/merchants/#{@merchant1.id}/invoices"
 
-      click_on(@invoice1.id.to_s)
+      click_link(@invoice1.id.to_s)
+
 
       expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
     end
@@ -71,7 +63,7 @@ RSpec.describe 'Merchant Invoices Index Page' do
 
       visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
 
-      click_on(@discount1.id)
+      click_link(@discount1.id)
 
       expect(current_path).to eq(merchant_bulk_discount_path(@merchant1, @discount1))
     end

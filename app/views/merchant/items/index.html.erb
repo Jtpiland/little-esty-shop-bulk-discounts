@@ -1,15 +1,12 @@
-<h1>My Items</h1>
+<div class="dashboard"><h1>My Items</h1>
+  <div>
+  <button type="button" class="btn btn-dark"><%= link_to 'Create a New Item', "/merchants/#{@merchant.id}/items/new" %></button>
+  </div>
+  </div>
 
-<h2>My Top 5 Items By Revenue</h2>
-<div class= "top-5-items">
-<% @merchant.items.top_5_items.each do |item| %>
-  <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>, Revenue Generated: <%= item.total %></p>
-  <p>Top selling date for <%= item.name %> was <%= item.best_day.strftime("%A, %B %d, %Y") %></p>
-<% end %>
-</div>
+<div class="dashboard-list-wrapper">
 
-<%= link_to 'Create a New Item', "/merchants/#{@merchant.id}/items/new" %>
-
+<div>
 <div id="enabled">
   <h2>Enabled Items</h2>
   <% @merchant.items.enabled.each do |item| %>
@@ -24,18 +21,36 @@
     </div>
   <% end %>
 </div>
+</div>
 
-<div id='disabled'>
-  <h2>Disabled Items</h2>
-  <% @merchant.items.disabled.each do |item| %>
-    <div id= <%= "#{item.id}" %>>
-      <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
-      <p>Description: <%= item.description %></p>
-      <p>Unit Price: <%= item.unit_price %></p>
-      <p>Status: <%= item.status %></p>
-      <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=0", method: :patch, local: true do |f| %>
-        <%= f.submit "Enable" %>
-      <% end %>
+<div class="flex">
+  <div id='disabled'>
+      <div>
+      <h2>Disabled Items</h2>
+        <div class="list">
+        <% @merchant.items.disabled.each do |item| %>
+          <div id= <%= "#{item.id}" %>>
+            <p><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></p>
+            <p>Description: <%= item.description %></p>
+            <p>Unit Price: <%= item.unit_price %></p>
+            <p>Status: <%= item.status %></p>
+            <%= form_with url: "/merchants/#{@merchant.id}/items/#{item.id}?status=0", method: :patch, local: true do |f| %>
+              <%= f.submit "Enable" %>
+            <% end %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div>
+  <h2>My Top 5 Items By Revenue</h2>
+    <div class= "top-5-items">
+    <% @merchant.items.top_5_items.each do |item| %>
+      <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}" %>, Revenue Generated: <%= item.total %></p>
+      <p>Top selling date for <%= item.name %> was <%= item.best_day.strftime("%A, %B %d, %Y") %></p>
+    <% end %>
     </div>
-  <% end %>
+</div>
 </div>

@@ -1,15 +1,31 @@
-<h1><%= @merchant.name %></h1>
-<%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
-<%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
-<% Customer.top_customers(@merchant.id).each do |customer| %>
-  <p><%= customer.first_name %> <%= customer.last_name %>: <%= customer.total_transactions %></p>
-<% end %>
-<h2>Items Ready to Ship</h2>
-<% Item.ready_to_ship(@merchant.id).each do |item| %>
-    <div id= <%= "#{item.id}" %>>
-      <p><%= item.name %></p>
-      <p>Invoice ID: <%= link_to "#{item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.invoice_id}" %>, Created at: <%= item.created_at.strftime("%A, %B %d, %Y") %></p>
-    </div>
-<% end %>
+<div class="dashboard"><h1><%= @merchant.name %></h1>
+  <div id="links">
+    <button type="button" class="btn btn-dark"><%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %></button>
+    <button type="button" class="btn btn-dark"><%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %></button>
+    <button type="button" class="btn btn-dark"><%= link_to 'My Discounts', merchant_bulk_discounts_path(@merchant) %></button>
 
-<%= link_to 'My Discounts', merchant_bulk_discounts_path(@merchant) %>
+  </div>
+</div>
+<div class="dashboard-list-wrapper">
+  <div class="flex">
+    <div>
+      <h2 class="list-wrapper">Favorite Customers</h2>
+      <% Customer.top_customers(@merchant.id).each do |customer| %>
+        <p><%= customer.first_name %> <%= customer.last_name %>: <%= customer.total_transactions %></p>
+      <% end %>
+    </div>
+  </div>
+  <div class="flex">
+    <div>
+      <h2 class="list-wrapper">Items Ready to Ship</h2>
+      <div class="list">
+        <% Item.ready_to_ship(@merchant.id).each do |item| %>
+          <div id= <%= "#{item.id}" %>>
+            <p><%= item.name %></p>
+            <p>Invoice ID: <%= link_to "#{item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.invoice_id}" %>, Created at: <%= item.created_at.strftime("%A, %B %d, %Y") %></p>
+          </div>
+        <% end %>
+      </div>
+  </div>
+</div>
+</div>

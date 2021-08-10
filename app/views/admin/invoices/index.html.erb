@@ -1,7 +1,16 @@
-<h1>Invoices</h1>
-<%= link_to "Dashboard", admin__index_path %>
-<%= link_to "Merchants", admin_merchants_path %>
+<div class="dashboard"><h1>Invoices</h1>
+  <div>
+    <button type="button" class="btn btn-dark"><%= link_to "Dashboard", admin__index_path %></button>
+    <button type="button" class="btn btn-dark"><%= link_to "Merchants", admin_merchants_path %></button>
+  </div>
+</div>
 
-<% @invoices.each do |invoice| %>
-  <%= link_to "Invoice # #{invoice.id}", admin_invoice_path(invoice.id) %></br>
-<% end %>
+<div class="flex">
+  <div>
+    <div class="list">
+      <% @invoices.each do |invoice| %>
+        <%= link_to "Invoice # #{invoice.id}", admin_invoice_path(invoice.id) %></br></br>
+      <% end %>
+    </div>
+  </div>
+</div>

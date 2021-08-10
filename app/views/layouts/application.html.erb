@@ -13,11 +13,17 @@
 
     <body>
       <div class="container">
-        <nav>
-          <%= link_to 'Admin Dashboard', "/admin" %>
-          <%= link_to 'Merchant Dashboard', "/merchants/1/dashboard"  %>
-        </nav>
-        <%= yield %>
+        <div class="wrapper">
+          <nav>
+            <button type="button" class="btn btn-dark"><%= link_to 'Admin Dashboard', "/admin" %></button></br></br>
+            <button type="button" class="btn btn-dark"><%= link_to 'Merchant Dashboard', "/merchants/1/dashboard" %></button>
+          </nav>
+          <div class="header-container">
+              <h1>Little Etsy Shop</h1>
+            </div>
+        </div>
+      </div>
+      <%= yield %>
         <footer>
           <!-- <p>github repo: <%# @repo.name %></p> -->
         <!--  < @contributors[1..4].each do |contributor|  -->
@@ -27,5 +33,4 @@
         <!--  <p>Total Merged PRs:  @pull_count  </p> -->
         </footer>
     </body>
-  </div>
 </html>

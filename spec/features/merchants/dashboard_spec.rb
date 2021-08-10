@@ -68,7 +68,7 @@ RSpec.describe 'merchant dashboard page' do
 
       expect(page).to have_content('My Items')
 
-      click_on 'My Items'
+      click_link 'My Items'
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
     end
 
@@ -77,7 +77,7 @@ RSpec.describe 'merchant dashboard page' do
 
       expect(page).to have_content('My Invoices')
 
-      click_on 'My Invoices'
+      click_link 'My Invoices'
       expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices")
     end
 
