@@ -1,15 +1,21 @@
 <% @merchant.bulk_discounts.each do |discount| %>
-<section id="discount-<%= discount.id %>">
-  <h2><%= link_to "#{discount.id}", merchant_bulk_discount_path(@merchant.id, discount.id) %></h2>
-  <p>Percentage: <%= discount.percentage %>%</p>
-  <p>Quantity Threshold: <%= discount.quantity %></p>
-  <%= button_to "Delete Bulk Discount", merchant_bulk_discount_path(@merchant.id, discount.id), method: :delete %>
-</section>
+<div class="flex"
+  <div>
+    <section id="discount-<%= discount.id %>">
+      <h2><%= link_to "#{discount.id}", merchant_bulk_discount_path(@merchant.id, discount.id) %></h2>
+      <p>Percentage: <%= discount.percentage %>%</p>
+      <p>Quantity Threshold: <%= discount.quantity %></p>
+      <%= button_to "Delete Bulk Discount", merchant_bulk_discount_path(@merchant.id, discount.id), method: :delete %>
+    </section>
 <% end %>
+  </div>
+
+  <div>
+    <% @holidays.each do |holiday| %>
+    <p><%= holiday.name %>
+    <%= holiday.date %></p>
+    <% end %>
+  </div>
+</div>
 
 <%= link_to "Create New Discount", new_merchant_bulk_discount_path(@merchant.id) %></br>
-
-<% @holidays.each do |holiday| %>
-<p><%= holiday.name %>
-<%= holiday.date %></p>
-<% end %>
