@@ -10,6 +10,9 @@
     <h4><%= ii.name %></h4>
     <p>Quantity: <%= ii.quantity %></p>
     <p>Unit Price: $<%= ii.price_to_dollars(ii.item_price) %></p>
+    <% if ii.find_discount.present? %>
+      <p>Discount ID: <%= link_to "#{ii.find_discount.id}", merchant_bulk_discount_path(ii.find_discount.merchant_id, ii.find_discount) %></p>
+    <% end %>
     <%= form_with model: [:merchant, ii], local: true do |f| %>
       <%= f.label :status %>
       <%= f.select :status, ['pending', 'packaged', 'shipped'] %>
@@ -19,3 +22,4 @@
 <% end %>
 
 <p>Total Revenue: $<%= @invoice.total_revenue(params[:merchant_id]) %> </p>
+<p>Total Discounted Revenue: <%= number_to_currency(@invoice.total_discounted_revenue) %></p>

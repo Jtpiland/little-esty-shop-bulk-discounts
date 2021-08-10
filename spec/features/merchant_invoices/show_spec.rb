@@ -77,5 +77,11 @@ RSpec.describe 'Invoice show page' do
         expect(page).to have_content('packaged')
       end
     end
+
+    it 'displays the discounted revenue on invoice for merchant' do
+      visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
+
+      expect(page).to have_content("$#{@invoice1.total_discounted_revenue}")
+    end
   end
 end

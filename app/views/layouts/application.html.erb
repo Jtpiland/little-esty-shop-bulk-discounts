@@ -7,13 +7,16 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- <link rel="stylesheet" href="app/assets/stylesheets/gary_stylesheet.css" title="text/css" />  link on individual page and customize that way... -->
+
   </head>
-  <div class="container">
-    <nav>
-      <%= link_to 'Admin Dashboard', "/admin" %>
-      <%= link_to 'Merchant Dashboard', "/merchants/1/dashboard"  %>
-    </nav>
+
     <body>
+      <div class="container">
+        <nav>
+          <%= link_to 'Admin Dashboard', "/admin" %>
+          <%= link_to 'Merchant Dashboard', "/merchants/1/dashboard"  %>
+        </nav>
         <%= yield %>
         <footer>
           <!-- <p>github repo: <%# @repo.name %></p> -->

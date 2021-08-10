@@ -31,5 +31,41 @@ RSpec.describe InvoiceItem, type: :model do
 
       expect(ii.unit_price_to_dollars).to eq(200.00)
     end
+
+    it 'can find the total revenue for the invoice item in cents' do
+      merchant_1 = Merchant.create!(name: 'The Wand Shop')
+      discount_1 = merchant_1.bulk_discounts.create!(percentage: 10, quantity: 5)
+      discount_1 = merchant_1.bulk_discounts.create!(percentage: 20, quantity: 10)
+      item = merchant_1.items.create!(name: 'Horse Feather Oak', description: 'So magical', unit_price: 20000)
+      customer = Customer.create!(first_name: 'Harry', last_name: 'Potter')
+      invoice = Invoice.create!(customer_id: customer.id, status: 0)
+      ii = InvoiceItem.create!(item_id: item.id, invoice_id: invoice.id, status: 1, unit_price: 20000, quantity: 10)
+
+      expect(ii.total_ii_revenue).to eq(200000)
+    end
+
+    it 'can find the maximum discount for an invoice item' do
+      merchant_1 = Merchant.create!(name: 'The Wand Shop')
+      discount_1 = merchant_1.bulk_discounts.create!(percentage: 10, quantity: 5)
+      discount_2 = merchant_1.bulk_discounts.create!(percentage: 20, quantity: 10)
+      item = merchant_1.items.create!(name: 'Horse Feather Oak', description: 'So magical', unit_price: 20000)
+      customer = Customer.create!(first_name: 'Harry', last_name: 'Potter')
+      invoice = Invoice.create!(customer_id: customer.id, status: 0)
+      ii = InvoiceItem.create!(item_id: item.id, invoice_id: invoice.id, status: 1, unit_price: 20000, quantity: 10)
+
+      expect(ii.find_discount).to eq(discount_2)
+    end
+
+    it 'can find the total discounted revenue' do
+      merchant_1 = Merchant.create!(name: 'The Wand Shop')
+      discount_1 = merchant_1.bulk_discounts.create!(percentage: 10, quantity: 5)
+      discount_1 = merchant_1.bulk_discounts.create!(percentage: 20, quantity: 10)
+      item = merchant_1.items.create!(name: 'Horse Feather Oak', description: 'So magical', unit_price: 20000)
+      customer = Customer.create!(first_name: 'Harry', last_name: 'Potter')
+      invoice = Invoice.create!(customer_id: customer.id, status: 0)
+      ii = InvoiceItem.create!(item_id: item.id, invoice_id: invoice.id, status: 1, unit_price: 20000, quantity: 10)
+
+      expect(ii.discounted_ii_revenue).to eq(1600)
+    end
   end
 end

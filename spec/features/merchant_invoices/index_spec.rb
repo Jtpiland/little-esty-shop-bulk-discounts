@@ -5,6 +5,8 @@ RSpec.describe 'Merchant Invoices Index Page' do
     @merchant1 = Merchant.create!(name: 'Sparkys Shop')
     @merchant2 = Merchant.create!(name: 'BBs Petstore')
 
+    @discount1= @merchant1.bulk_discounts.create!(percentage: 10, quantity: 5)
+
     @customer1 = Customer.create!(first_name: 'Petey', last_name: 'Wimbley')
     @customer2 = Customer.create!(first_name: 'Victoria', last_name: 'Jenkins')
     @customer3 = Customer.create!(first_name: 'Pedro', last_name: 'Oscar')
@@ -37,6 +39,11 @@ RSpec.describe 'Merchant Invoices Index Page' do
     @invoice4.items << [@item4]
     @invoice5.items << [@item4]
     @invoice6.items << [@item1, @item2]
+
+    InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, unit_price: 1000, quantity: 5, status: 1, created_at: "2012-03-25 09:54:09 UTC")
+    InvoiceItem.create!(invoice_id: @invoice2.id, item_id: @item2.id, unit_price: 1000, quantity: 5, status: 1, created_at: "2012-03-24 09:54:09 UTC")
+    InvoiceItem.create!(invoice_id: @invoice4.id, item_id: @item4.id, unit_price: 1000, quantity: 5, status: 2)
+    InvoiceItem.create!(invoice_id: @invoice5.id, item_id: @item4.id, unit_price: 1000, quantity: 5, status: 1, created_at: "2012-03-23 09:54:09 UTC")
   end
 
   describe 'merchant' do
@@ -58,6 +65,15 @@ RSpec.describe 'Merchant Invoices Index Page' do
       click_on(@invoice1.id.to_s)
 
       expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
+    end
+
+    it 'can link to the bulk discount that was applied to the invoice item' do
+
+      visit "/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}"
+
+      click_on(@discount1.id)
+
+      expect(current_path).to eq(merchant_bulk_discount_path(@merchant1, @discount1))
     end
   end
 end
