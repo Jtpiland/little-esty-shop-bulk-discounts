@@ -51,23 +51,13 @@ RSpec.describe 'merchant items show page' do
     @invoice5.items << [@item2]
     @invoice6.items << [@item1]
   end
-  # Merchant Item Update
-  # As a merchant,
-  # When I visit the merchant show page of an item x
-  # I see a link to update the item information. x
-  # When I click the link x
-  # Then I am taken to a page to edit this item x
-  # And I see a form filled in with the existing item attribute information x
-  # When I update the information in the form and I click ‘submit’ x
-  # Then I am redirected back to the item show page where I see the updated information x
-  # And I see a flash message stating that the information has been successfully updated. x
 
   describe 'as a merchant' do
     describe 'when i visit the merchant show page of an item' do
       it 'can see a link to update the item information' do
         visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
 
-        click_on "Edit This Item"
+        click_link "Edit This Item"
 
         expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}/edit")
 
@@ -75,11 +65,11 @@ RSpec.describe 'merchant items show page' do
         fill_in "Description", with: "I love fluffy things"
         fill_in "Unit Price", with: 399
         click_on "Update My Item"
-
+        
         expect(current_path).to eq("/merchants/#{@item1.merchant_id}/items/#{@item1.id}")
         expect(page).to have_content("Beddy Tear")
         expect(page).to have_content("I love fluffy things")
-        expect(page).to have_content(399)
+        expect(page).to have_content(3.99)
         expect(page).to have_content("Item Successfully Updated!")
       end
     end

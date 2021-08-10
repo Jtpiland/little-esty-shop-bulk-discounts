@@ -1,5 +1,5 @@
 <div class="dashboard"><h1><%= @merchant.name %></h1>
-  <div>
+  <div id="links">
     <button type="button" class="btn btn-dark"><%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %></button>
     <button type="button" class="btn btn-dark"><%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %></button>
     <button type="button" class="btn btn-dark"><%= link_to 'My Discounts', merchant_bulk_discounts_path(@merchant) %></button>
@@ -20,7 +20,7 @@
       <h2 class="list-wrapper">Items Ready to Ship</h2>
       <div class="list">
         <% Item.ready_to_ship(@merchant.id).each do |item| %>
-          <div id= <%= "#{item.id}" %>
+          <div id= <%= "#{item.id}" %>>
             <p><%= item.name %></p>
             <p>Invoice ID: <%= link_to "#{item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{item.invoice_id}" %>, Created at: <%= item.created_at.strftime("%A, %B %d, %Y") %></p>
           </div>

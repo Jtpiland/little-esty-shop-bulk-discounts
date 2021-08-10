@@ -75,7 +75,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
   end
 
   it 'the link directs the user to the merchant index' do
-    click_on "Merchants"
+    click_link "Merchants"
 
     expect(current_path).to eq("/admin/merchants")
     expect(page).to have_content(Merchant.first.name)
@@ -83,7 +83,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
   end
 
   it 'the link directs the user to the invoice index' do
-    click_on "Invoices"
+    click_link "Invoices"
 
     expect(current_path).to eq("/admin/invoices")
     expect(page).to have_content(Invoice.first.id)

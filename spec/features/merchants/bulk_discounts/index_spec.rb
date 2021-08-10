@@ -34,7 +34,7 @@ RSpec.describe 'Merchant Bulk Discounts Index Page' do
 
       click_link "#{@discount_1.id}"
 
-      expect(current_path).to eq(merchant_bulk_discount_path("#{@merchant_1.id}", "#{@discount_1.id}"))
+      expect(current_path).to eq(merchant_bulk_discount_path(@merchant_1, @discount_1))
     end
   end
 
@@ -43,7 +43,7 @@ RSpec.describe 'Merchant Bulk Discounts Index Page' do
 
     click_link "Create New Discount"
 
-    expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant_1.id))
+    expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant_1))
   end
 
   it 'can delete a bulk discount and redirect back to merchants bulk discount index page' do
@@ -54,7 +54,7 @@ RSpec.describe 'Merchant Bulk Discounts Index Page' do
     expect(page).to_not have_content(@discount_1.id)
   end
 
-  it 'can display the next three upcoming holidays with their name and date' do #need to strengthin test 
+  it 'can display the next three upcoming holidays with their name and date' do
     expect(page).to have_content("Labor Day 2021-09-06")
     expect(page).to have_content("Columbus Day 2021-10-11")
     expect(page).to have_content("Veterans Day 2021-11-11")

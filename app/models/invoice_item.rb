@@ -21,14 +21,15 @@ class InvoiceItem < ApplicationRecord
     item.merchant.bulk_discounts
     .where('quantity <= ?', quantity)
     .order(percentage: :desc)
-    .first #order* to get other bulk discount columns .first
+    .first
   end
 
   def discounted_ii_revenue
     if find_discount.blank?
       total_ii_revenue / 100
     else
-      ((total_ii_revenue - (total_ii_revenue * (find_discount.percentage.to_f/100)))/100).round(2)
+      ((total_ii_revenue - (total_ii_revenue * (find_discount.percentage.to_f/100)))/100)
+      # (total_ii_revenue * (1-(find_discount.percentage / 100.00))).round(2)
     end
   end
 end

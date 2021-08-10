@@ -70,7 +70,7 @@ RSpec.describe 'merchant items index page' do
       expect(page).to have_content("Create a New Item")
       expect(page).to have_link("Create a New Item")
 
-      click_on "Create a New Item"
+      click_link "Create a New Item"
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
 
       fill_in "Name", with: "Chewbacca Chew Toy"
@@ -78,22 +78,10 @@ RSpec.describe 'merchant items index page' do
       fill_in "Unit Price", with: 699
       click_on "Submit"
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
-      #dane, 8.1: is there a test i can insert where the page can test if the last item's attributes are a specific thing?
       expect(page).to have_content("Chewbacca Chew Toy")
       expect(page).to have_content("So Chewy")
       expect(page).to have_content(699)
     end
-
-    # Merchant Items Index: 5 most popular items
-    # As a merchant
-    # When I visit my items index page
-    # Then I see the names of the top 5 most popular items ranked by total revenue generated
-    # And I see that each item name links to my merchant item show page for that item
-    # And I see the total revenue generated next to each item name
-    # Notes on Revenue Calculation:
-    # - Only invoices with at least one successful transaction should count towards revenue
-    # - Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-    # - Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
 
     it 'can create and display top 5 merchant items' do
       visit "/merchants/#{@merchant1.id}/items"
@@ -105,7 +93,6 @@ RSpec.describe 'merchant items index page' do
         expect(@item2.name).to appear_before(@item4.name)
         expect(@item4.name).to appear_before(@item3.name)
         expect(@item3.name).to appear_before(@item6.name)
-
       end
     end
   end
