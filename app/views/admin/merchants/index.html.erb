@@ -10,14 +10,16 @@
   <div class="flex">
     <div>
       <h2 class="list-wrapper"> Enabled Merchants</h2>
-      <% @merchants.group_by_enabled.each do |merchant| %>
-        <div id=<%= "#{merchant.id}"%>>
-          <%= link_to merchant.name, admin_merchant_path(merchant.id) %>
-          <%= form_with url: "/admin/merchants/update/#{merchant.id}?status=false", method: :patch, local: true do |f| %>
-            <%= f.submit "Disable" %>
-          <% end %>
+        <div class="list">
+        <% @merchants.group_by_enabled.each do |merchant| %>
+          <div id=<%= "#{merchant.id}"%>>
+            <%= link_to merchant.name, admin_merchant_path(merchant.id) %>
+            <%= form_with url: "/admin/merchants/update/#{merchant.id}?status=false", method: :patch, local: true do |f| %>
+              <%= f.submit "Disable" %>
+            <% end %>
+          </div>
+        <% end %>
         </div>
-      <% end %>
       </div>
 
 
@@ -40,11 +42,14 @@
 
 <div>
   <div id="top_five">
-    <h2 class="list-wrapper">Top Five Merchants By Revenue<% @merchants.top_five_by_revenue.each do |merchant| %></h2>
-    <%= link_to merchant.name, admin_merchant_path(merchant.id) %>
-    <%= number_to_currency(merchant.total_revenue) %>
-    <%= merchant.top_sale_date_for_merchant.created_at.strftime("%A, %B %d, %Y") %></br>
-    <% end %>
+    <h2 class="list-wrapper">Top Five Merchants By Revenue</h2>
+    <div class="box-shadow">
+    <% @merchants.top_five_by_revenue.each do |merchant| %>
+      <%= link_to merchant.name, admin_merchant_path(merchant.id) %>
+      <%= number_to_currency(merchant.total_revenue) %>
+      <%= merchant.top_sale_date_for_merchant.created_at.strftime("%A, %B %d, %Y") %></br>
+      <% end %>
+    </div>
   </div>
 </div>
 </div>

@@ -18,7 +18,6 @@ RSpec.describe Invoice, type: :model do
     @merchant2 = Merchant.create!(name: 'BBs Petstore')
 
     @merchant1.bulk_discounts.create!(percentage: 10, quantity: 5)
-    #add anothe merchant to show it is using the correct discount
 
     @customer1 = Customer.create!(first_name: 'Petey', last_name: 'Wimbley')
     @customer2 = Customer.create!(first_name: 'Victoria', last_name: 'Jenkins')

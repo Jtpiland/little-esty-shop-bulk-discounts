@@ -1,6 +1,8 @@
 <div align="center">
-<h1>My Invoices</h1>
-<% @invoices.each do |invoice| %>
-  <p><%= link_to  "#{invoice.id}", "/merchants/#{params[:merchant_id]}/invoices/#{invoice.id}" %> </p>
-<% end %>
+  <h1>My Invoices</h1>
+  <div class="box-shadow invoices">
+    <% @invoices.each do |invoice| %>
+      <p><%= link_to  "#{invoice.id}", "/merchants/#{params[:merchant_id]}/invoices/#{invoice.id}" %> </p>
+    <% end %>
+  </div>
 </div>

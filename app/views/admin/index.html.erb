@@ -12,11 +12,13 @@
   <div class="flex">
     <div>
       <h3 class="list-wrapper">Top Customers</h3>
-      <ol>
-        <% Customer.admin_top_five_customers.each do |customer| %>
-          <li><%= "#{customer.first_name} " "#{customer.last_name} " "#{customer.transaction_count}"%></li>
-        <% end %>
-      </ol>
+      <div class="box-shadow">
+        <ol>
+          <% Customer.admin_top_five_customers.each do |customer| %>
+            <li><%= "#{customer.first_name} " "#{customer.last_name} " "#{customer.transaction_count}"%></li>
+          <% end %>
+        </ol>
+      </div>
     </div>
   </div>
 
