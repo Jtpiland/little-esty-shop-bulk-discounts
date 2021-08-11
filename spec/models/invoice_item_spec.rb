@@ -32,7 +32,7 @@ RSpec.describe InvoiceItem, type: :model do
       expect(ii.unit_price_to_dollars).to eq(200.00)
     end
 
-    it 'can find the total revenue for the invoice item in cents' do
+    it 'can find the total revenue for the invoice item' do
       merchant_1 = Merchant.create!(name: 'The Wand Shop')
       discount_1 = merchant_1.bulk_discounts.create!(percentage: 10, quantity: 5)
       discount_1 = merchant_1.bulk_discounts.create!(percentage: 20, quantity: 10)
@@ -41,7 +41,7 @@ RSpec.describe InvoiceItem, type: :model do
       invoice = Invoice.create!(customer_id: customer.id, status: 0)
       ii = InvoiceItem.create!(item_id: item.id, invoice_id: invoice.id, status: 1, unit_price: 20000, quantity: 10)
 
-      expect(ii.total_ii_revenue).to eq(200000)
+      expect(ii.total_ii_revenue).to eq(2000)
     end
 
     it 'can find the maximum discount for an invoice item' do

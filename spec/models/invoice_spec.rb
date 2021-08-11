@@ -18,6 +18,7 @@ RSpec.describe Invoice, type: :model do
     @merchant2 = Merchant.create!(name: 'BBs Petstore')
 
     @merchant1.bulk_discounts.create!(percentage: 10, quantity: 5)
+    #add anothe merchant to show it is using the correct discount
 
     @customer1 = Customer.create!(first_name: 'Petey', last_name: 'Wimbley')
     @customer2 = Customer.create!(first_name: 'Victoria', last_name: 'Jenkins')
@@ -45,12 +46,6 @@ RSpec.describe Invoice, type: :model do
     @transaction5 = @invoice5.transactions.create!(credit_card_number: "7934759378", credit_card_expiration_date: '03/20', result: 0)
     @transaction6 = @invoice6.transactions.create!(credit_card_number: "7894739999", credit_card_expiration_date: '04/20', result: 0)
 
-    # @invoice1.items << [@item1]
-    # @invoice2.items << [@item2]
-    # @invoice3.items << [@item3, @item4]
-    # @invoice4.items << [@item4]
-    # @invoice5.items << [@item4]
-
     @ii1 = InvoiceItem.create!(invoice_id: @invoice6.id, item_id: @item1.id, quantity: 2, status: 2)
     @ii2 = InvoiceItem.create!(invoice_id: @invoice6.id, item_id: @item2.id, quantity: 1, status: 2)
     @ii3 = InvoiceItem.create!(invoice_id: @invoice6.id, item_id: @item4.id, quantity: 1, status: 2)
@@ -59,7 +54,6 @@ RSpec.describe Invoice, type: :model do
 
   describe 'class methods' do
     it 'can retrieve invoices tied to merchant' do
-      # expect(Invoice.merchant_invoices(@merchant1.id).first.id).to eq(@invoice1.id)
       expect(Invoice.merchant_invoices(@merchant1.id).last.id).to eq(@invoice6.id)
       expect(Invoice.merchant_invoices(@merchant1.id).length).to eq(2)
     end
@@ -86,10 +80,10 @@ RSpec.describe Invoice, type: :model do
       expect(@invoice3.total_invoice_revenue).to eq(35.00)
     end
 
-    # describe '#total_discounted_revenue' do
-    #   it 'can find the toal revenue including discounts' do
-    #     expect(@invoice3.total_discounted_revenue).to eq(315.00)
-    #   end
-    # end
+    describe '#total_discounted_revenue' do
+      it 'can find the toal revenue including discounts' do
+        expect(@invoice3.total_discounted_revenue).to eq(31.50)
+      end
+    end
   end
 end
