@@ -31,12 +31,13 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-right: 10%;
+  margin-right: 30%;
 }
 
 .wrapper {
   display: flex;
   width: 100%;
+  margin-top: 10px;
 }
 
 .dashboard {
@@ -44,6 +45,9 @@ body {
   justify-content: space-between;
   width: 100%;
   padding: 0 5%;
+  border-bottom: 8px black solid;
+  margin-bottom: 5px;
+  margin-top: 10px;
 }
 
 .dashboard-list-wrapper {
@@ -53,19 +57,89 @@ body {
   padding: 0 5%;
 }
 
+.border-bk {
+  border: 2px #000000 solid;
+  margin-top: 15px;
+  padding: 5px;
+  box-shadow: 10px 5px 5px black;
+}
+
 .list-wrapper {
   opacity: 0.5;
   background-color: rgba(0, 0, 0, 0.5);
   text-decoration: underline;
 }
 
+.discount-margin {
+  margin-top: 10px;
+}
+
 .list {
-  max-height: 400px;
+  max-height: 450px;
   overflow-y: auto;
+  border: 2px black solid;
+  padding: 10px;
+  min-width: 225px;
+  box-shadow: 10px 5px 5px black;
+}
+
+.box-shadow {
+  border: 2px black solid;
+  box-shadow: 10px 5px 5px black;
+  padding: 10px;
 }
 
 .flex {
   display: flex;
   justify-content: center;
+  width: 100%;
+}
+
+.status-wrapper {
+  margin-left: 5%;
+  margin-top: 15px;
+}
+
+.nav-button {
+  width: 100px;
+  margin: 3px;
+  padding: 3px;
+}
+
+.discounts-wrapper {
+  display: flex;
+  margin-top: 25px;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.holiday-list {
+  max-height: 175px;
+}
+
+.bulk-discounts {
+  border-bottom: 2px black solid;
+  margin: 5px 0px;
+  padding: 3px;
+}
+
+.discount-button {
+  width: 300px;
+  margin-top: 20px;
+  padding: 3px;
+  height: 50px;
+}
+
+.invoices {
+  width: 200px;
+}
+
+.item-width {
+  max-width: 175px;
+}
+
+.items-list-wrapper {
+  display: flex;
+  justify-content: space-around;
   width: 100%;
 }

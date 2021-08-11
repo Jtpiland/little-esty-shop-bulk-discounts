@@ -10,11 +10,14 @@
   <div class="flex">
     <div>
       <h2 class="list-wrapper">Favorite Customers</h2>
+      <div class="box-shadow">
       <% Customer.top_customers(@merchant.id).each do |customer| %>
         <p><%= customer.first_name %> <%= customer.last_name %>: <%= customer.total_transactions %></p>
       <% end %>
+      </div>
     </div>
   </div>
+  
   <div class="flex">
     <div>
       <h2 class="list-wrapper">Items Ready to Ship</h2>

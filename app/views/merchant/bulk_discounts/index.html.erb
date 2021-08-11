@@ -1,7 +1,17 @@
-<% @merchant.bulk_discounts.each do |discount| %>
-<div class="flex"
-  <div>
-    <section id="discount-<%= discount.id %>">
+<div class="dashboard">
+  <h2>Bulk Discounts</h2>
+  <div id="links">
+    <button type="button" class="btn btn-dark"><%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %></button>
+    <button type="button" class="btn btn-dark"><%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %></button>
+    <button type="button" class="btn btn-dark"><%= link_to 'My Discounts', merchant_bulk_discounts_path(@merchant) %></button>
+
+  </div>
+</div>
+
+<div class="discounts-wrapper">
+  <div class="list discount-margin">
+    <% @merchant.bulk_discounts.each do |discount| %>
+    <section class="bulk-discounts" id="discount-<%= discount.id %>">
       <h2><%= link_to "#{discount.id}", merchant_bulk_discount_path(@merchant.id, discount.id) %></h2>
       <p>Percentage: <%= discount.percentage %>%</p>
       <p>Quantity Threshold: <%= discount.quantity %></p>
@@ -10,7 +20,7 @@
 <% end %>
   </div>
 
-  <div>
+  <div class="border-bk holiday-list">
     <h3>Upcoming Holidays</h3>
     <% @holidays.each do |holiday| %>
     <p><%= holiday.name %>
@@ -19,4 +29,6 @@
   </div>
 </div>
 
-<button type="button" class="btn btn-dark"><%= link_to "Create New Discount", new_merchant_bulk_discount_path(@merchant.id) %></button></br>
+<div class="flex">
+  <button type="button" class="btn btn-dark discount-button"><%= link_to "Create New Discount", new_merchant_bulk_discount_path(@merchant.id) %></button>
+</div>
